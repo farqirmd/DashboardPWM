@@ -11,6 +11,10 @@ import "./step.css";
 /// Layout
 import Nav from "./layouts/nav";
 import Footer from "./layouts/Footer";
+
+/// Powermeter
+import DashboardPwm from "./components/Dashboard/DashboardPwm";
+
 /// Dashboard
 import Home from "./components/Dashboard/Home";
 import DashboardDark from "./components/Dashboard/DashboardDark";
@@ -119,6 +123,9 @@ import { ThemeContext } from "../context/ThemeContext";
 const Markup = () => {
   const { menuToggle } = useContext(ThemeContext);
   const routes = [
+    /// Powermeter
+    { url: "dashboard-pwm", component: DashboardPwm},
+
     /// Dashboard
     { url: "", component: Home },
     { url: "dashboard", component: Home },

@@ -59,7 +59,17 @@ const SideBar = () => {
   path = path.split("/");
   path = path[path.length - 1];
   /// Active menu
-  let deshBoard = [
+  let Powermeter = [
+    "",
+    "dashboard-dark",
+    "guest-list",
+    "guest-detail",
+    "concierge",
+    "room-list",
+    "reviews",
+    "task",
+    ],
+    deshBoard = [
       "",
       "dashboard-dark",
       "guest-list",
@@ -177,6 +187,12 @@ const SideBar = () => {
     >
       <PerfectScrollbar className="deznav-scroll">
         <MM className="metismenu" id="menu">
+        <li className={`${Powermeter.includes(path) ? "mm-active" : ""}`}>
+        <Link to="dashboard-pwm" className="ai-icon" >
+              <i className="flaticon-381-knob-1"></i>
+              <span className="nav-text">Powermeter</span>
+            </Link>
+          </li>
           <li className={`${deshBoard.includes(path) ? "mm-active" : ""}`}>
             <Link className="has-arrow ai-icon" to="#" >
               <i className="flaticon-025-dashboard"></i>
