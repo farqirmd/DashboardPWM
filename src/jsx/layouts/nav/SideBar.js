@@ -59,16 +59,7 @@ const SideBar = () => {
   path = path.split("/");
   path = path[path.length - 1];
   /// Active menu
-  let Powermeter = [
-    "",
-    "dashboard-dark",
-    "guest-list",
-    "guest-detail",
-    "concierge",
-    "room-list",
-    "reviews",
-    "task",
-    ],
+  let Powermeter = ["dashboard-pwm"],
     deshBoard = [
       "",
       "dashboard-dark",
