@@ -5,7 +5,7 @@ class RadialDount extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			series: [70],
+			series: [props.value],
 			options: {
 				chart: {
 					type: 'radialBar',
