@@ -18,89 +18,70 @@ import { ThemeContext } from "../../../context/ThemeContext";
 import RadialDount from './Dashboard/RadialDount'; 
 import ReservationChart from './Dashboard/ReservationChart'; 
 import LatestCustomer from './Dashboard/LatestCustomer'; 
+import axios from 'axios';
 
 const AnalyticsDonut = loadable(() =>
 	pMinDelay(import("./Dashboard/AnalyticsDonut"), 1000)
 );
 
+const url = "https://power-meter-nodejs.herokuapp.com/";
 
 const Home = () => {
 	const { changeBackground } = useContext(ThemeContext);
+	const [data, setData] = useState([]);
+	const [loading, setLoading] = useState(true);
+
 	useEffect(() => {
 		changeBackground({ value: "light", label: "Light" });
+		axios.get(url + 'latestValue').then((response) => {
+			setData(response.data.data)
+			setLoading(false)
+		})
 	}, []);
 	const [value, onChange] = useState(new Date());
-	return(
-		<>
-			<div className="row">
-				<div className="col-xl-6">
-					<div className="row">
-						<div className="col-xl-12">
-							<div className="card text-center">
-								<div className="card-body">
-                                    <h1>Voltage Average</h1>
-									<div id="radialChart" className="radialChart">
-										<RadialDount value={174}/>
-									</div>
-									<h2>174</h2>
-									<span className="fs-16 text-black">Volt</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="col-xl-6">
-					<div className="row">
-						<div className="col-xl-12">
-                        <div className="card text-center">
-								<div className="card-body">
-                                    <h1>Current</h1>
-									<div id="radialChart" className="radialChart">
-										<RadialDount value={174}/>
-									</div>
-									<h2>70</h2>
-									<span className="fs-16 text-black">Ampere</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>	
-            <div className="row">
-				<div className="col-xl-6">
-					<div className="row">
-						<div className="col-xl-12">
-							<div className="card text-center">
-								<div className="card-body">
-                                    <h1>Power</h1>
-									<div id="radialChart" className="radialChart">
-										<RadialDount value={174}/>
-									</div>
-									<h2>80</h2>
-									<span className="fs-16 text-black">Watt</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="col-xl-6">
-					<div className="row">
-						<div className="col-xl-12">
-                        <div className="card text-center">
-								<div className="card-body">
-                                    <h1>Frequency</h1>
-									<div id="radialChart" className="radialChart">
-										<RadialDount value={174}/>
-									</div>
-									<h2>118</h2>
-									<span className="fs-16 text-black">Hertz</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+
+	if (loading){
+		return(
+			<div>
+				<h1>Loading</h1>
 			</div>
-		</>
-	)
+		)
+	} else{
+		return(
+			<>
+				<div className="row">
+					{data.map((sensor, index) => {
+						if (sensor._field === "voltage_avr"){
+							sensor._satuan = "Volt"
+						} else if (sensor._field === "current_avr"){
+							sensor._satuan = "Ampere"
+						} else if (sensor._field === "power_avr"){
+							sensor._satuan = "Watt"
+						} else {
+							sensor._satuan = "Hertz"
+						}
+						return([
+							<div key={index} className="col-xl-6">
+								<div className="row">
+									<div className="col-xl-12">
+										<div className="card text-center">
+											<div className="card-body">
+												<h1>{sensor._field}</h1>
+												<div id="radialChart" className="radialChart">
+													<RadialDount value={sensor._value}/>
+												</div>
+												<h2>{sensor._value}</h2>
+												<span className="fs-16 text-black">{sensor._satuan}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						])
+					})}
+				</div>
+			</>
+		)
+	}
 }
 export default Home;
