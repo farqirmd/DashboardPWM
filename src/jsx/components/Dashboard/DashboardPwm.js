@@ -16,7 +16,7 @@ import pic4 from './../../../images/avatar/4.jpg';
 //Import
 import { ThemeContext } from "../../../context/ThemeContext";
 import RadialDount from './Dashboard/RadialDount'; 
-import ReservationChart from './Dashboard/ReservationChart'; 
+import HistoryChart from './Dashboard/HistoryChart'; 
 import LatestCustomer from './Dashboard/LatestCustomer'; 
 import axios from 'axios';
 
@@ -28,13 +28,17 @@ const url = "https://power-meter-nodejs.herokuapp.com/";
 
 const Home = () => {
 	const { changeBackground } = useContext(ThemeContext);
-	const [data, setData] = useState([]);
+	const [latestValue, setLatestValue] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const [dataHarian, setDataHarian] = useState([]);
 
 	useEffect(() => {
 		changeBackground({ value: "light", label: "Light" });
 		axios.get(url + 'latestValue').then((response) => {
-			setData(response.data.data)
+			setLatestValue(response.data.data)
+		})
+		axios.get(url + 'dataHarian').then((response) => {
+			setDataHarian(response.data.data)
 			setLoading(false)
 		})
 	}, []);
@@ -50,7 +54,7 @@ const Home = () => {
 		return(
 			<>
 				<div className="row">
-					{data.map((sensor, index) => {
+					{latestValue.map((sensor, index) => {
 						if (sensor._field === "voltage_avr"){
 							sensor._satuan = "Volt"
 						} else if (sensor._field === "current_avr"){
@@ -79,6 +83,31 @@ const Home = () => {
 							</div>
 						])
 					})}
+				</div>
+				<div className="row">
+					<div className="col-12">
+						<div className="card">
+							<div className="card-header border-0 d-sm-flex d-block">
+								<div className="me-auto mb-sm-0 mb-3">
+									<h4 className="card-title mb-2">Statistik Data</h4>
+									<span>Data 12 jam terakhir</span>
+								</div>
+								<div className="d-flex justify-content-between">
+									<div className="d-flex me-5">
+										<p className="mb-0 me-2">Region : <b style={{color:'#000'}}>{dataHarian[0].region}</b></p>
+									</div>
+									<div className="d-flex me-3">
+										<p className="mb-0 me-2">Device : <b style={{color:'#000'}}>{dataHarian[0].sensor_id}</b></p>
+									</div>
+								</div>
+							</div>
+							<div className="card-body">
+								<div id="historyData" className="historyData">
+									<HistoryChart value={dataHarian} />
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</>
 		)

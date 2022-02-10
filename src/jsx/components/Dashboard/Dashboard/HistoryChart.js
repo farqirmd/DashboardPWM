@@ -1,16 +1,45 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
 
-class ReservationChart extends React.Component {
+
+class HistoryChart extends React.Component {
+	voltage = [];
+	current = [];
+	power = [];
+	freq = [];
+	time = [];
+
 	constructor(props) {
 		super(props);
+		console.log(props.value);
+		props.value.map((sensor, index) => {
+			if (sensor._field === "voltage_avr"){
+				this.voltage = this.voltage.concat([sensor._value])
+			} else if (sensor._field === "current_avr"){
+				this.current = this.current.concat([sensor._value])
+			} else if (sensor._field === "power_avr"){
+				this.power = this.power.concat([sensor._value])
+			} else {
+				this.freq = this.freq.concat([sensor._value])
+				console.log(this.freq)
+			}
+			this.time = this.time.concat([sensor._time.slice(11, 19)]);
+		});
+		this.time = [...new Set(this.time)];
+
 		this.state = {
 			series: [{
-			  name: 'series1',
-			  data: [400, 400, 650, 500, 900, 750, 850 ,600, 950, 500, 650, 700]
+			  name: 'voltage',
+			  data: this.voltage
 			}, {
-			  name: 'series2',
-			  data: [350, 350, 420, 370, 500, 400, 550, 420, 600, 450, 550, 400]
+			  name: 'current',
+			  data: this.current
+			}, {
+				name: 'power',
+				data: this.power
+			}, {
+				name: 'freq',
+				data: this.freq
 			}],
 			options: {
 				chart: {
@@ -20,7 +49,7 @@ class ReservationChart extends React.Component {
 						show:false
 					}
 				},
-				colors:["#1362FC","#FF6E5A"],
+				colors:["#1362FC","#DC3545","#4CB32B","#FFC107",],
 				dataLabels: {
 				  enabled: false
 				},
@@ -54,7 +83,7 @@ class ReservationChart extends React.Component {
 					},
 				},
 				xaxis: {
-					categories: ["01","02","03","04","05","06","07","08","09","10","11","12"],
+					categories: this.time,
 					labels:{
 						style: {
 							colors: '#787878',
@@ -91,4 +120,4 @@ class ReservationChart extends React.Component {
 	}
 }
 
-export default ReservationChart;
+export default HistoryChart;

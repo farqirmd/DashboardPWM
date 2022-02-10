@@ -16,7 +16,7 @@ import pic4 from './../../../images/avatar/4.jpg';
 //Import
 import { ThemeContext } from "../../../context/ThemeContext";
 import RadialDount from './Dashboard/RadialDount'; 
-import ReservationChart from './Dashboard/ReservationChart'; 
+import HistoryChart from './Dashboard/HistoryChart'; 
 import LatestCustomer from './Dashboard/LatestCustomer'; 
 
 const AnalyticsDonut = loadable(() =>
@@ -184,7 +184,7 @@ const DashboardDark = () => {
 						</div>
 						<div className="card-body">
 							<div id="reservationChart" className="reservationChart">
-								<ReservationChart />
+								<HistoryChart />
 							</div>
 						</div>
 					</div>
