@@ -193,7 +193,7 @@ const Demo5 = () => {
 						</div>
 						<div className="card-body">
 							<div id="reservationChart" className="reservationChart">
-								<HistoryChart />
+								{/* <HistoryChart /> */}
 							</div>
 						</div>
 					</div>

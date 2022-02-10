@@ -127,7 +127,7 @@ const Markup = () => {
     { url: "dashboard-pwm", component: DashboardPwm},
 
     /// Dashboard
-    { url: "", component: Home },
+    { url: "", component: DashboardPwm },
     { url: "dashboard", component: Home },
 	{ url: "dashboard-dark", component: DashboardDark },
     { url: "guest-list", component: GuestList },
