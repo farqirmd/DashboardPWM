@@ -19,6 +19,7 @@ import RadialDount from './Dashboard/RadialDount';
 import HistoryChart from './Dashboard/HistoryChart'; 
 import LatestCustomer from './Dashboard/LatestCustomer'; 
 import axios from 'axios';
+import Hypnosis from "react-cssfx-loading/lib/Hypnosis";
 
 const AnalyticsDonut = loadable(() =>
 	pMinDelay(import("./Dashboard/AnalyticsDonut"), 1000)
@@ -30,7 +31,11 @@ const Home = () => {
 	const { changeBackground } = useContext(ThemeContext);
 	const [latestValue, setLatestValue] = useState([]);
 	const [loading, setLoading] = useState(true);
-	const [dataHarian, setDataHarian] = useState([]);
+	const [dataHistoryChart, setDataHistoryChart] = useState([]);
+	const [statusData, setStatusData] = useState();
+	// const [dataMingguan, setDataMingguan] = useState([]);
+	// const [dataBulanan, setDataBulanan] = useState([]);
+	// const [dataHistoryChart, setDataHistoryChart] = useState();
 
 	useEffect(() => {
 		changeBackground({ value: "light", label: "Light" });
@@ -38,16 +43,51 @@ const Home = () => {
 			setLatestValue(response.data.data)
 		})
 		axios.get(url + 'dataHarian').then((response) => {
-			setDataHarian(response.data.data)
+			setDataHistoryChart(response.data.data)
 			setLoading(false)
+			setStatusData("Harian")
 		})
 	}, []);
 	const [value, onChange] = useState(new Date());
 
+	const handleHarian = () => {
+		setLoading(true)
+		axios.get(url + 'dataHarian').then((response) => {
+			setDataHistoryChart(response.data.data)
+			setLoading(false)
+			setStatusData("Harian")
+		})
+	}
+
+	const handleMingguan = () => {
+		setLoading(true)
+		axios.get(url + 'dataMingguan').then((response) => {
+			setDataHistoryChart(response.data.data)
+			setLoading(false)
+			setStatusData("Mingguan")
+		})
+	}
+
+	const handleBulanan = () => {
+		setLoading(true)
+		axios.get(url + 'dataBulanan').then((response) => {
+			setDataHistoryChart(response.data.data)
+			setLoading(false)
+			setStatusData("Bulanan")
+		})
+	}
+
 	if (loading){
 		return(
 			<div>
-				<h1>Loading</h1>
+				<div style={{width:'100%', height:'100%'}}>
+					<div className="d-flex justify-content-center">
+						<div className='justify-content-center'>
+							<Hypnosis width="500px" height="500px" />
+							<h1>Loading</h1>
+						</div>
+					</div>
+				</div>
 			</div>
 		)
 	} else{
@@ -90,20 +130,32 @@ const Home = () => {
 							<div className="card-header border-0 d-sm-flex d-block">
 								<div className="me-auto mb-sm-0 mb-3">
 									<h4 className="card-title mb-2">Statistik Data</h4>
-									<span>Data 12 jam terakhir</span>
+									<span>Data {statusData}</span>
 								</div>
-								<div className="d-flex justify-content-between">
+								<div className="d-flex justify-content-between align-items-center">
 									<div className="d-flex me-5">
-										<p className="mb-0 me-2">Region : <b style={{color:'#000'}}>{dataHarian[0].region}</b></p>
+										<p className="mb-0 me-2" style={{fontSize:'18px'}}>Region : <b style={{color:'#000'}}>{dataHistoryChart[0].region}</b></p>
 									</div>
 									<div className="d-flex me-3">
-										<p className="mb-0 me-2">Device : <b style={{color:'#000'}}>{dataHarian[0].sensor_id}</b></p>
+										<p className="mb-0 me-2" style={{fontSize:'18px'}}>Device : <b style={{color:'#000'}}>{dataHistoryChart[0].sensor_id}</b></p>
+									</div>
+									<div className="d-flex me-3 basic-dropdown">
+										<Dropdown>
+											<Dropdown.Toggle variant="primary">
+												Filter
+											</Dropdown.Toggle>
+											<Dropdown.Menu className="dropdown-menu-right">
+												<Dropdown.Item onClick={handleHarian}>Harian</Dropdown.Item>
+												<Dropdown.Item onClick={handleMingguan}>Mingguan</Dropdown.Item>
+												<Dropdown.Item onClick={handleBulanan}>Bulanan</Dropdown.Item>
+											</Dropdown.Menu>
+										</Dropdown>
 									</div>
 								</div>
 							</div>
 							<div className="card-body">
 								<div id="historyData" className="historyData">
-									<HistoryChart value={dataHarian} />
+									<HistoryChart value={dataHistoryChart} />
 								</div>
 							</div>
 						</div>

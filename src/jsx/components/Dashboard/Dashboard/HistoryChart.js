@@ -11,7 +11,7 @@ class HistoryChart extends React.Component {
 
 	constructor(props) {
 		super(props);
-		console.log(props.value);
+		// console.log(props.value);
 		props.value.map((sensor, index) => {
 			if (sensor._field === "voltage_avr"){
 				this.voltage = this.voltage.concat([sensor._value])
@@ -21,7 +21,7 @@ class HistoryChart extends React.Component {
 				this.power = this.power.concat([sensor._value])
 			} else {
 				this.freq = this.freq.concat([sensor._value])
-				console.log(this.freq)
+				// console.log(this.freq)
 			}
 			this.time = this.time.concat([sensor._time.slice(11, 19)]);
 		});
