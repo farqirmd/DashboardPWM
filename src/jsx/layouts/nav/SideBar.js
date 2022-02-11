@@ -555,7 +555,7 @@ const SideBar = () => {
           </li>
         </MM>
 		<div className="copyright">
-			<p><strong>Innap Hotel Admin</strong> © 2021 All Rights Reserved</p>
+			<p><strong>Antares Admin</strong> © 2022 All Rights Reserved</p>
 			<p className="fs-12">Made with <span className="heart"></span> by DexignZone</p>
 		</div>
       </PerfectScrollbar>
