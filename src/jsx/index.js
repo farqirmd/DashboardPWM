@@ -13,7 +13,11 @@ import Nav from "./layouts/nav";
 import Footer from "./layouts/Footer";
 
 /// Powermeter
-import DashboardPwm from "./components/Dashboard/DashboardPwm";
+import Powermeter1 from "./components/Dashboard/DashboardPwm";
+import Powermeter2 from "./components/Dashboard/DashboardPwm2";
+import Powermeter3 from "./components/Dashboard/DashboardPwm3";
+import Powermeter4 from "./components/Dashboard/DashboardPwm4";
+import Powermeter5 from "./components/Dashboard/DashboardPwm5";
 
 /// Dashboard
 import Home from "./components/Dashboard/Home";
@@ -124,10 +128,14 @@ const Markup = () => {
   const { menuToggle } = useContext(ThemeContext);
   const routes = [
     /// Powermeter
-    { url: "dashboard-pwm", component: DashboardPwm},
+    { url: "powermeter-1", component: Powermeter1},
+    { url: "powermeter-2", component: Powermeter2},
+    { url: "powermeter-3", component: Powermeter3},
+    { url: "powermeter-4", component: Powermeter4},
+    { url: "powermeter-5", component: Powermeter5},
 
     /// Dashboard
-    { url: "", component: DashboardPwm },
+    { url: "", component: Home },
     { url: "dashboard", component: Home },
 	{ url: "dashboard-dark", component: DashboardDark },
     { url: "guest-list", component: GuestList },

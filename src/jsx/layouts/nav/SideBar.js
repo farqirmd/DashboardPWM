@@ -59,7 +59,13 @@ const SideBar = () => {
   path = path.split("/");
   path = path[path.length - 1];
   /// Active menu
-  let Powermeter = ["dashboard-pwm"],
+  let Powermeter = [
+    "powermeter-1",
+    "powermeter-2",
+    "powermeter-3",
+    "powermeter-4",
+    "powermeter-5",
+    ],
     deshBoard = [
       "",
       "dashboard-dark",
@@ -178,11 +184,22 @@ const SideBar = () => {
     >
       <PerfectScrollbar className="deznav-scroll">
         <MM className="metismenu" id="menu">
-        <li className={`${Powermeter.includes(path) ? "mm-active" : ""}`}>
-        <Link to="dashboard-pwm" className="ai-icon" >
+          <li className={`${Powermeter.includes(path) ? "mm-active" : ""}`}>
+            {/* <Link to="dashboard-pwm" className="ai-icon" >
+              <i className="flaticon-381-knob-1"></i>
+              <span className="nav-text">Powermeter</span>
+            </Link> */}
+            <Link className="has-arrow ai-icon" to="#" >
               <i className="flaticon-381-knob-1"></i>
               <span className="nav-text">Powermeter</span>
             </Link>
+            <ul >
+              <li><Link className={`${path === "powermeter-1" ? "mm-active" : "dashboard"}`} to="/powermeter-1">Powermeter 1</Link></li>
+				      <li><Link className={`${path === "powermeter-2" ? "mm-active" : ""}`} to="/powermeter-2">Powermeter 2</Link></li>
+              <li><Link className={`${path === "powermeter-3" ? "mm-active" : ""}`} to="/powermeter-3">Powermeter 3</Link></li>
+              <li><Link className={`${path === "powermeter-4" ? "mm-active" : ""}`} to="/powermeter-4">Powermeter 4</Link></li>
+              <li><Link className={`${path === "powermeter-5" ? "mm-active" : ""}`} to="/powermeter-5">Powermeter 5</Link></li>
+            </ul>
           </li>
           <li className={`${deshBoard.includes(path) ? "mm-active" : ""}`}>
             <Link className="has-arrow ai-icon" to="#" >
