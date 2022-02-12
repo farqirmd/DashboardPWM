@@ -28,21 +28,20 @@ const AnalyticsDonut = loadable(() =>
 const url = "https://power-meter-nodejs.herokuapp.com/";
 
 const Home = () => {
+	let idPm = window.location.pathname.split('/')
+	idPm = idPm[idPm.length - 1]; 
 	const { changeBackground } = useContext(ThemeContext);
-	const [latestValue, setLatestValue] = useState([]);
+	const [dataTerbaru, setDataTerbaru] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [dataHistoryChart, setDataHistoryChart] = useState([]);
 	const [statusData, setStatusData] = useState();
-	// const [dataMingguan, setDataMingguan] = useState([]);
-	// const [dataBulanan, setDataBulanan] = useState([]);
-	// const [dataHistoryChart, setDataHistoryChart] = useState();
 
 	useEffect(() => {
 		changeBackground({ value: "light", label: "Light" });
-		axios.get(url + 'latestValue').then((response) => {
-			setLatestValue(response.data.data)
+		axios.get(url + 'data-terbaru/pm5').then((response) => {
+			setDataTerbaru(response.data.data)
 		})
-		axios.get(url + 'dataHarian').then((response) => {
+		axios.get(url + 'data-harian/pm5').then((response) => {
 			setDataHistoryChart(response.data.data)
 			setLoading(false)
 			setStatusData("Harian")
@@ -52,7 +51,7 @@ const Home = () => {
 
 	const handleHarian = () => {
 		setLoading(true)
-		axios.get(url + 'dataHarian').then((response) => {
+		axios.get(url + 'data-harian/pm5').then((response) => {
 			setDataHistoryChart(response.data.data)
 			setLoading(false)
 			setStatusData("Harian")
@@ -61,7 +60,7 @@ const Home = () => {
 
 	const handleMingguan = () => {
 		setLoading(true)
-		axios.get(url + 'dataMingguan').then((response) => {
+		axios.get(url + 'data-mingguan/pm5').then((response) => {
 			setDataHistoryChart(response.data.data)
 			setLoading(false)
 			setStatusData("Mingguan")
@@ -70,7 +69,7 @@ const Home = () => {
 
 	const handleBulanan = () => {
 		setLoading(true)
-		axios.get(url + 'dataBulanan').then((response) => {
+		axios.get(url + 'data-bulanan/pm5').then((response) => {
 			setDataHistoryChart(response.data.data)
 			setLoading(false)
 			setStatusData("Bulanan")
@@ -94,7 +93,7 @@ const Home = () => {
 		return(
 			<>
 				<div className="row">
-					{latestValue.map((sensor, index) => {
+					{dataTerbaru.map((sensor, index) => {
 						if (sensor._field === "voltage_avr"){
 							sensor._satuan = "Volt"
 						} else if (sensor._field === "current_avr"){
