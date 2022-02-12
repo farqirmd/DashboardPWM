@@ -304,7 +304,7 @@ const Home = () => {
 									<div className="row">
 										<div className="col-xl-6 d-flex align-items-center col-sm-6 mb-sm-0 mb-3">
 											<div className="me-4">
-												<AnalyticsDonut value={75} backgroundColor="#1362fc" backgroundColor2="rgb(246, 246, 246)"/>
+												<AnalyticsDonut value={75} backgroundColor="#fc5a13" backgroundColor2="rgb(246, 246, 246)"/>
 												{/* <span className="donut" data-peity='{ "fill": ["var(--primary)", "rgba(246, 246, 246)"],   "innerRadius": 45, "radius": 10}'>6/8</span> */}
 											</div>
 											<div>

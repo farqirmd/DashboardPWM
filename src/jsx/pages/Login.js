@@ -8,7 +8,7 @@ import { loadingToggleAction,loginAction,
 import logoAntares from "../../images/svg/logoSymbol.svg";
 import logoText from "../../images/svg/logoText.svg";
 //import logo from "../../images/logo-full.png";
-import loginbg from "../../images/pic1.png";
+import loginbg from "../../images/-pic1.png";
 
 function Login (props) {
   const [email, setEmail] = useState('demo@example.com');
@@ -45,10 +45,10 @@ function Login (props) {
 					<div className="text-center mb-4 pt-5">
 						{/* <svg className="logo-abbr me-3" width="60" height="60" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<g clipPath="url(#clip0)">
-							<rect className="rect-primary-rect" width="80" height="80" rx="16" fill="#1362FC"/>
+							<rect className="rect-primary-rect" width="80" height="80" rx="16" fill="#fc5a13"/>
 							<circle cx="42" cy="19" r="10" fill="white"/>
 							<circle cx="75.5" cy="76.5" r="16.5" fill="#12A7FB"/>
-							<circle cx="5.5" cy="1.5" r="17.5" fill="#1362FC"/>
+							<circle cx="5.5" cy="1.5" r="17.5" fill="#fc5a13"/>
 							<circle className="rect-primary-rect-1" cx="5.5" cy="1.5" r="16.5" stroke="white" strokeOpacity="0.66" strokeWidth="2"/>
 							<path d="M33.7656 87.2159C34.9565 76.5246 37.5874 53.6112 38.5845 47.4881V47.4881C39.1698 43.8941 40.2547 47.2322 39.8692 50.8531C38.9933 59.0813 37.1429 74.1221 35.5121 87.4131C33.1225 106.889 33.3507 95.974 33.7635 88.0818" stroke="white" strokeWidth="21" strokeLinecap="round" strokeLinejoin="round"/>
 							</g>
@@ -65,7 +65,7 @@ function Login (props) {
 						<img src={logoText} alt="logo-text" className="brand-title" width="108" height="68" viewBox="0 0 123 68" fill="none" xmlns="http://www.w3.org/2000/svg"/>
 					</div>
 					<h3 className="mb-2">Welcome back!</h3>
-					<p>Internet of Things</p>
+					<p>Reliable Internet of Things Platform</p>
 				</div>
 				<div className="aside-image" style={{backgroundImage:"url(" + loginbg + ")"}}></div>
 			</div>
