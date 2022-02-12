@@ -78,15 +78,9 @@ const Home = () => {
 
 	if (loading){
 		return(
-			<div>
-				<div style={{width:'100%', height:'100%'}}>
-					<div className="d-flex justify-content-center">
-						<div className='justify-content-center'>
-							<Hypnosis width="500px" height="500px" />
-							<h1>Loading</h1>
-						</div>
-					</div>
-				</div>
+			<div className='d-flex flex-column min-vh-100 justify-content-center align-items-center'>
+				<Hypnosis width="200px" height="200px" color='#FC5A13' />
+				<h1 className='mt-5' >Loading</h1>
 			</div>
 		)
 	} else{
@@ -111,7 +105,7 @@ const Home = () => {
 											<div className="card-body">
 												<h1>{sensor._field}</h1>
 												<div id="radialChart" className="radialChart">
-													<RadialDount value={sensor._value}/>
+													<RadialDount value={sensor._value} jenis={sensor._field}/>
 												</div>
 												<h2>{sensor._value}</h2>
 												<span className="fs-16 text-black">{sensor._satuan}</span>

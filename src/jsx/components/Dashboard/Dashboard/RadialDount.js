@@ -5,16 +5,18 @@ class RadialDount extends React.Component {
 	constructor(props) {
 		super(props);
 		let nilaiChart = props.value;
-		if (nilaiChart >= 10000){
-			nilaiChart = nilaiChart / 1000;
+		if (props.jenis === 'voltage_avr'){
+			nilaiChart = (nilaiChart / 1000) * 100;
 		}
-		else if (nilaiChart >= 1000){
-			nilaiChart = nilaiChart / 100;
+		else if (props.jenis === 'current_avr'){
+			nilaiChart = (nilaiChart / 200) * 100;
 		}
-		else if (nilaiChart >= 100){
-			nilaiChart = nilaiChart / 10;
+		else if (props.jenis === 'power_avr'){
+			nilaiChart = (nilaiChart / 20000) * 100;
+		} 
+		else{
+			nilaiChart = (nilaiChart / 50) * 100;
 		}
-		console.log(props)
 
 		this.state = {
 			series: [nilaiChart],
