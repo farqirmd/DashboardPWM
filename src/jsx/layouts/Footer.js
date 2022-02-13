@@ -6,11 +6,11 @@ const Footer = () => {
     <div className="footer">
       <div className="copyright">
         <p>
-          Copyright © Designed &amp; Developed by{" "}
-          <a href="http://dexignzone.com/" target="_blank" rel="noreferrer">
-            DexignZone
+          Copyright © Developed by{" "}
+          <a href="https://antares.id/" target="_blank" rel="noreferrer">
+            Antares
           </a>{" "}
-          {d.getFullYear()}
+          {/* {d.getFullYear()} */}
         </p>
       </div>
     </div>

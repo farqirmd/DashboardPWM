@@ -12,6 +12,9 @@ import "./step.css";
 import Nav from "./layouts/nav";
 import Footer from "./layouts/Footer";
 
+/// Home
+import Landing from "./components/Dashboard/Landing";
+
 /// Powermeter
 import Powermeter1 from "./components/Dashboard/DashboardPwm";
 import Powermeter2 from "./components/Dashboard/DashboardPwm2";
@@ -127,6 +130,9 @@ import { ThemeContext } from "../context/ThemeContext";
 const Markup = () => {
   const { menuToggle } = useContext(ThemeContext);
   const routes = [
+    /// Powermeter
+    { url: "Home", component: Landing},
+
     /// Powermeter
     { url: "powermeter-1", component: Powermeter1},
     { url: "powermeter-2", component: Powermeter2},

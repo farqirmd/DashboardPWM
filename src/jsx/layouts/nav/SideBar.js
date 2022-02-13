@@ -59,23 +59,24 @@ const SideBar = () => {
   path = path.split("/");
   path = path[path.length - 1];
   /// Active menu
-  let Powermeter = [
+  let deshBoard = [""],
+    Powermeter = [
     "powermeter-1",
     "powermeter-2",
     "powermeter-3",
     "powermeter-4",
     "powermeter-5",
     ],
-    deshBoard = [
-      "",
-      "dashboard-dark",
-      "guest-list",
-      "guest-detail",
-      "concierge",
-      "room-list",
-      "reviews",
-      "task",
-    ],
+    // deshBoard = [
+    //   "",
+    //   "dashboard-dark",
+    //   "guest-list",
+    //   "guest-detail",
+    //   "concierge",
+    //   "room-list",
+    //   "reviews",
+    //   "task",
+    // ],
     app = [
       "app-profile",
       "post-details",
@@ -184,6 +185,12 @@ const SideBar = () => {
     >
       <PerfectScrollbar className="deznav-scroll">
         <MM className="metismenu" id="menu">
+          <li className={`${deshBoard.includes(path) ? "mm-active" : ""}`}>
+            <Link to="" className="ai-icon" >
+              <i className="flaticon-025-dashboard"></i>
+              <span className="nav-text">Home</span>
+            </Link>
+          </li>
           <li className={`${Powermeter.includes(path) ? "mm-active" : ""}`}>
             {/* <Link to="dashboard-pwm" className="ai-icon" >
               <i className="flaticon-381-knob-1"></i>
@@ -201,7 +208,7 @@ const SideBar = () => {
               <li><Link className={`${path === "powermeter-5" ? "mm-active" : ""}`} to="/powermeter-5">Powermeter 5</Link></li>
             </ul>
           </li>
-          <li className={`${deshBoard.includes(path) ? "mm-active" : ""}`}>
+          {/* <li className={`${deshBoard.includes(path) ? "mm-active" : ""}`}>
             <Link className="has-arrow ai-icon" to="#" >
               <i className="flaticon-025-dashboard"></i>
               <span className="nav-text">Dashboard</span>
@@ -435,7 +442,7 @@ const SideBar = () => {
               </li>
             </ul>
           </li>
-			<li className={`${plugins.includes(path) ? "mm-active" : ""}`}>
+			    <li className={`${plugins.includes(path) ? "mm-active" : ""}`}>
 				<Link className="has-arrow ai-icon" to="#" >
 					<i className="flaticon-045-heart"></i><span className="nav-text">Plugins</span>
 				</Link>
@@ -448,8 +455,8 @@ const SideBar = () => {
 				  <li><Link className={`${path === "map-jqvmap" ? "mm-active" : ""}`} to="/map-jqvmap">Jqv Map</Link></li>
 				  <li><Link className={`${path === "uc-lightgallery" ? "mm-active" : ""}`} to="/uc-lightgallery">Light Gallery</Link></li>
 				</ul>
-			</li>
-			<li className={`${redux.includes(path) ? "mm-active" : ""}`}>
+		    	</li>
+		    	<li className={`${redux.includes(path) ? "mm-active" : ""}`}>
                     <Link className="has-arrow ai-icon" to="#" >
                         <i className="flaticon-087-stop"></i><span className="nav-text">Redux</span>
                     </Link>
@@ -458,7 +465,7 @@ const SideBar = () => {
                   <li><Link className={`${path === "redux-form" ? "mm-active" : ""}`} to="/redux-form">Redux Form</Link></li>
                   <li><Link className={`${path === "redux-wizard" ? "mm-active" : ""}`} to="/redux-wizard">Redux Wizard</Link></li>
                 </ul>
-            </li>
+          </li>
           <li className={`${widget.includes(path) ? "mm-active" : ""}`}>
             <Link to="widget-basic" className="ai-icon" >
               <i className="flaticon-013-checkmark"></i>
@@ -569,11 +576,11 @@ const SideBar = () => {
                 </Link>
               </li>
             </ul>
-          </li>
+          </li> */}
         </MM>
 		<div className="copyright">
 			<p><strong>Antares Admin</strong> © 2022 All Rights Reserved</p>
-			<p className="fs-12">Made with <span className="heart"></span> by DexignZone</p>
+			<p className="fs-12">Made with <span className="heart"></span> by Antares</p>
 		</div>
       </PerfectScrollbar>
     </div>
