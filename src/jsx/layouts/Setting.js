@@ -85,7 +85,7 @@ const Setting = () => {
 														}}
 													/>
 												</div>
-												<div className="col-sm-6">
+												{/* <div className="col-sm-6">
 													<p>Primary Color</p>
 													<div>
 														{colors.map((color, i) => (
@@ -144,7 +144,7 @@ const Setting = () => {
 															</span>
 														))}
 													</div>
-												</div>
+												</div> */}
 											</div>
 										</div>
 									</Tab.Pane>
@@ -235,7 +235,7 @@ const Setting = () => {
 			</div>
 		</div>
 	
-		<div className={`dz-demo-panel ${demoToggle ? "show" : ""}`}>
+		{/* <div className={`dz-demo-panel ${demoToggle ? "show" : ""}`}>
 			<div className="bg-overlay" onClick={() => setDemoToggle(!demoToggle)}></div>
 				<div className="bg-close"  onClick={() => setDemoToggle(!demoToggle)} ></div>
 				<Link to="#" className="dz-demo-trigger" onClick={() => setDemoToggle(!demoToggle)}>
@@ -290,14 +290,6 @@ const Setting = () => {
 						</div>
 						<h5 className="text-black">Demo 5</h5>
 						<hr />
-						{/* <div className="overlay-bx dz-demo-bx ">
-							<div className="overlay-wrapper rounded-lg"><img src={demo6} alt="" className="w-100" /></div>
-							<div className="overlay-layer">
-								<Link to={"#"} onClick={() => setDemoTheme(6,'ltr')} data-theme="6" className="btn dz_theme_demo btn-secondary btn-sm mr-2">Try It -></Link>
-							</div>
-						</div>
-						<h5 className="text-black">Demo 6</h5>
-						<hr /> */}
 					</div>
 				</PerfectScrollbar>	
 				<div className="fs-12 pt-3">
@@ -306,7 +298,7 @@ const Setting = () => {
 					<Link to={"#"}  className="text-primary"> documentation.</Link>
 				</div>
 			</div>
-		</div>
+		</div> */}
 	</>
   );
 };
