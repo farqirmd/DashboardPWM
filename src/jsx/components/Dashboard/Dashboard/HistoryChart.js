@@ -49,7 +49,7 @@ class HistoryChart extends React.Component {
 						show:false
 					}
 				},
-				colors:["#fc5a13","#DC3545","#4CB32B","#FFC107",],
+				colors:["#FF8849","#3DB7E4","#69BE28","#6d346a",],
 				dataLabels: {
 				  enabled: false
 				},
