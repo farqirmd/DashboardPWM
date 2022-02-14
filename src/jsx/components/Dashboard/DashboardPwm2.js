@@ -127,10 +127,10 @@ const Home = () => {
 								</div>
 								<div className="d-flex justify-content-between align-items-center">
 									<div className="d-flex me-5">
-										{/* <p className="mb-0 me-2" style={{fontSize:'18px'}}>Region : <b style={{color:'#000'}}>{dataHistoryChart[0].region}</b></p> */}
+										<p className="mb-0 me-2" style={{fontSize:'18px'}}>Region : <b style={{color:'#000'}}>{dataHistoryChart.length === 0 ? "Tidak ada data" : dataHistoryChart[0].region}</b></p>
 									</div>
 									<div className="d-flex me-3">
-										<p className="mb-0 me-2" style={{fontSize:'18px'}}>Device : <b style={{color:'#000'}}>{dataHistoryChart[0].sensor_id}</b></p>
+										<p className="mb-0 me-2" style={{fontSize:'18px'}}>Device : <b style={{color:'#000'}}>{dataHistoryChart.length === 0 ? "Tidak ada data" : dataHistoryChart[0].sensor_id}</b></p>
 									</div>
 									<div className="d-flex me-3 basic-dropdown">
 										<Dropdown>
