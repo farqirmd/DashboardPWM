@@ -41,44 +41,9 @@ const Home = () => {
 
 	useEffect(() => {
 		changeBackground({ value: "light", label: "Light" });
-		axios.get(url + 'data-terbaru/pm1').then((response) => {
-			setDataTerbaru(response.data.data)
-		})
-		axios.get(url + 'data-harian/pm1').then((response) => {
-			setDataHistoryChart(response.data.data)
-			setLoading(false)
-			setStatusData("Harian")
-		})
+		setLoading(false)
 		return () => setLoading(false);
 	}, []);
-	const [value, onChange] = useState(new Date());
-
-	const handleHarian = () => {
-		setLoading(true)
-		axios.get(url + 'data-harian/pm1').then((response) => {
-			setDataHistoryChart(response.data.data)
-			setLoading(false)
-			setStatusData("Harian")
-		})
-	}
-
-	const handleMingguan = () => {
-		setLoading(true)
-		axios.get(url + 'data-mingguan/pm1').then((response) => {
-			setDataHistoryChart(response.data.data)
-			setLoading(false)
-			setStatusData("Mingguan")
-		})
-	}
-
-	const handleBulanan = () => {
-		setLoading(true)
-		axios.get(url + 'data-bulanan/pm1').then((response) => {
-			setDataHistoryChart(response.data.data)
-			setLoading(false)
-			setStatusData("Bulanan")
-		})
-	}
 
 	if (loading){
 		return(

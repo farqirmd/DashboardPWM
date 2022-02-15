@@ -201,11 +201,11 @@ const SideBar = () => {
               <span className="nav-text">Powermeter</span>
             </Link>
             <ul >
-              <li><Link className={`${path === "powermeter-1" ? "mm-active" : "dashboard"}`} to="/powermeter-1">Powermeter 1</Link></li>
-				      <li><Link className={`${path === "powermeter-2" ? "mm-active" : ""}`} to="/powermeter-2">Powermeter 2</Link></li>
-              <li><Link className={`${path === "powermeter-3" ? "mm-active" : ""}`} to="/powermeter-3">Powermeter 3</Link></li>
-              <li><Link className={`${path === "powermeter-4" ? "mm-active" : ""}`} to="/powermeter-4">Powermeter 4</Link></li>
-              <li><Link className={`${path === "powermeter-5" ? "mm-active" : ""}`} to="/powermeter-5">Powermeter 5</Link></li>
+              <li><Link className={`${path === "powermeter-1" ? "mm-active" : "dashboard"}`} to="/powermeter-1">Mitsubishi</Link></li>
+				      <li><Link className={`${path === "powermeter-2" ? "mm-active" : ""}`} to="/powermeter-2">Siemens</Link></li>
+              <li><Link className={`${path === "powermeter-3" ? "mm-active" : ""}`} to="/powermeter-3">Acuvim</Link></li>
+              <li><Link className={`${path === "powermeter-4" ? "mm-active" : ""}`} to="/powermeter-4">Demo</Link></li>
+              {/* <li><Link className={`${path === "powermeter-5" ? "mm-active" : ""}`} to="/powermeter-5">Powermeter 5</Link></li> */}
             </ul>
           </li>
           {/* <li className={`${deshBoard.includes(path) ? "mm-active" : ""}`}>

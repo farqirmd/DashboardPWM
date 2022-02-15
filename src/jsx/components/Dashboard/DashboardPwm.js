@@ -30,6 +30,9 @@ const url = "https://power-meter-nodejs.herokuapp.com/";
 const Home = () => {
 	let idPm = window.location.pathname.split('/')
 	idPm = idPm[idPm.length - 1]; 
+
+	const topic = encodeURI("showcase/pm5300/");
+
 	const { changeBackground } = useContext(ThemeContext);
 	const [dataTerbaru, setDataTerbaru] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -41,10 +44,10 @@ const Home = () => {
 
 	useEffect(() => {
 		changeBackground({ value: "light", label: "Light" });
-		axios.get(url + 'data-terbaru/pm1').then((response) => {
+		axios.get(url + 'data-terbaru?topic=' + topic).then((response) => {
 			setDataTerbaru(response.data.data)
 		})
-		axios.get(url + 'data-harian/pm1').then((response) => {
+		axios.get(url + 'data-harian?topic=' + topic).then((response) => {
 			setDataHistoryChart(response.data.data)
 			setLoading(false)
 			setStatusData("Harian")
@@ -55,7 +58,7 @@ const Home = () => {
 
 	const handleHarian = () => {
 		setLoading(true)
-		axios.get(url + 'data-harian/pm1').then((response) => {
+		axios.get(url + 'data-harian?topic=' + topic).then((response) => {
 			setDataHistoryChart(response.data.data)
 			setLoading(false)
 			setStatusData("Harian")
@@ -64,7 +67,7 @@ const Home = () => {
 
 	const handleMingguan = () => {
 		setLoading(true)
-		axios.get(url + 'data-mingguan/pm1').then((response) => {
+		axios.get(url + 'data-mingguan?topic=' + topic).then((response) => {
 			setDataHistoryChart(response.data.data)
 			setLoading(false)
 			setStatusData("Mingguan")
@@ -73,7 +76,7 @@ const Home = () => {
 
 	const handleBulanan = () => {
 		setLoading(true)
-		axios.get(url + 'data-bulanan/pm1').then((response) => {
+		axios.get(url + 'data-bulanan?topic=' + topic).then((response) => {
 			setDataHistoryChart(response.data.data)
 			setLoading(false)
 			setStatusData("Bulanan")
