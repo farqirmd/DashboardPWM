@@ -8,12 +8,13 @@ class HistoryChart extends React.Component {
 	power = [];
 	freq = [];
 	time = [];
+	filterData = [];
+	filterWarna = '';
+	temp = '';
 
 	constructor(props) {
 		super(props);
-		// console.log(props.value);
 		props.value.map((sensor, index) => {
-			console.log(sensor)
 			if (sensor._field === "V"){
 				this.voltage = this.voltage.concat([sensor._value])
 			} else if (sensor._field === "I"){
@@ -22,25 +23,38 @@ class HistoryChart extends React.Component {
 				this.power = this.power.concat([sensor._value])
 			} else {
 				this.freq = this.freq.concat([sensor._value])
-				// console.log(this.freq)
 			}
-			this.time = this.time.concat([sensor._time.slice(11, 19)]);
+			console.log(sensor._time)
+			this.temp = new Date(sensor._time)
+			console.log(this.temp)
+			// sensor._time = this.temp.toLocaleTimeString()
+			// this.time = this.time.concat([sensor._time.slice(11, 19)]);
+			this.time = this.time.concat([sensor._time]);
 		});
 		this.time = [...new Set(this.time)];
+		// console.log(this.time)
+
+		if (props.filter === 'Tegangan'){
+			this.filterData = this.voltage
+			this.filterWarna = "#FF8849"
+		}
+		else if (props.filter === 'Arus'){
+			this.filterData = this.current
+			this.filterWarna = "#3DB7E4"
+		}
+		else if (props.filter === 'Daya'){
+			this.filterData = this.power
+			this.filterWarna = "#69BE28"
+		}
+		else if (props.filter === 'Frekuensi'){
+			this.filterData = this.freq
+			this.filterWarna = "#6d346a"
+		}
 
 		this.state = {
 			series: [{
-			  name: 'voltage',
-			  data: this.voltage
-			}, {
-			  name: 'current',
-			  data: this.current
-			}, {
-				name: 'power',
-				data: this.power
-			}, {
-				name: 'freq',
-				data: this.freq
+			  name: props.filter,
+			  data: this.filterData
 			}],
 			options: {
 				chart: {
@@ -50,7 +64,7 @@ class HistoryChart extends React.Component {
 						show:false
 					}
 				},
-				colors:["#FF8849","#3DB7E4","#69BE28","#6d346a",],
+				colors:[this.filterWarna],
 				dataLabels: {
 				  enabled: false
 				},

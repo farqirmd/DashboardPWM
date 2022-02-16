@@ -38,6 +38,7 @@ const Home = () => {
 	const [loading, setLoading] = useState(true);
 	const [dataHistoryChart, setDataHistoryChart] = useState([]);
 	const [statusData, setStatusData] = useState();
+	const [filterSensor, setFilterSensor] = useState('Tegangan');
 	// const [dataMingguan, setDataMingguan] = useState([]);
 	// const [dataBulanan, setDataBulanan] = useState([]);
 	// const [dataHistoryChart, setDataHistoryChart] = useState();
@@ -46,9 +47,10 @@ const Home = () => {
 		changeBackground({ value: "light", label: "Light" });
 		axios.get(url + 'data-terbaru?topic=' + topic).then((response) => {
 			setDataTerbaru(response.data.data)
+			// console.log(response.data)
 		})
 		axios.get(url + 'data-harian?topic=' + topic).then((response) => {
-			console.log(response.data)
+			// console.log(response.data)
 			setDataHistoryChart(response.data.data)
 			setLoading(false)
 			setStatusData("Harian")
@@ -82,6 +84,38 @@ const Home = () => {
 			setLoading(false)
 			setStatusData("Bulanan")
 		})
+	}
+
+	const handleTegangan = () => {
+		setLoading(true)
+		setFilterSensor('Tegangan')
+		setTimeout(() => {
+			setLoading(false)
+		}, 1000);
+	}
+
+	const handleArus = () => {
+		setLoading(true)
+		setFilterSensor('Arus')
+		setTimeout(() => {
+			setLoading(false)
+		}, 1000);
+	}
+
+	const handleDaya = () => {
+		setLoading(true)
+		setFilterSensor('Daya')
+		setTimeout(() => {
+			setLoading(false)
+		}, 1000);
+	}
+
+	const handleFrekuensi = () => {
+		setLoading(true)
+		setFilterSensor('Frekuensi')
+		setTimeout(() => {
+			setLoading(false)
+		}, 1000);
 	}
 
 	if (loading){
@@ -145,9 +179,20 @@ const Home = () => {
 										<p className="mb-0 me-2" style={{fontSize:'18px'}}>Device : <b style={{color:'#000'}}>{dataHistoryChart.length === 0 ? "Tidak ada data" : dataHistoryChart[0].sensor_id}</b></p>
 									</div> */}
 									<div className="d-flex me-3 basic-dropdown">
+										<Dropdown className='me-3'>
+											<Dropdown.Toggle variant="primary">
+												{filterSensor}
+											</Dropdown.Toggle>
+											<Dropdown.Menu className="dropdown-menu-right">
+												<Dropdown.Item onClick={handleTegangan}>Tegangan</Dropdown.Item>
+												<Dropdown.Item onClick={handleArus}>Arus</Dropdown.Item>
+												<Dropdown.Item onClick={handleDaya}>Daya</Dropdown.Item>
+												<Dropdown.Item onClick={handleFrekuensi}>Frekuensi</Dropdown.Item>
+											</Dropdown.Menu>
+										</Dropdown>
 										<Dropdown>
 											<Dropdown.Toggle variant="primary">
-												Filter
+												{statusData}
 											</Dropdown.Toggle>
 											<Dropdown.Menu className="dropdown-menu-right">
 												<Dropdown.Item onClick={handleHarian}>Harian</Dropdown.Item>
@@ -160,7 +205,7 @@ const Home = () => {
 							</div>
 							<div className="card-body">
 								<div id="historyData" className="historyData">
-									<HistoryChart value={dataHistoryChart} />
+									<HistoryChart value={dataHistoryChart} filter={filterSensor}/>
 								</div>
 							</div>
 						</div>
