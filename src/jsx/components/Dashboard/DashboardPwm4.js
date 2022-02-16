@@ -92,13 +92,17 @@ const Home = () => {
 			<>
 				<div className="row">
 					{dataTerbaru.map((sensor, index) => {
-						if (sensor._field === "voltage_avr"){
+						if (sensor._field === "V"){
+							sensor._nama = "Tegangan"
 							sensor._satuan = "Volt"
-						} else if (sensor._field === "current_avr"){
+						} else if (sensor._field === "I"){
+							sensor._nama = "Arus"
 							sensor._satuan = "Ampere"
-						} else if (sensor._field === "power_avr"){
+						} else if (sensor._field === "P"){
+							sensor._nama = "Daya"
 							sensor._satuan = "Watt"
 						} else {
+							sensor._nama = "Frekuensi"
 							sensor._satuan = "Hertz"
 						}
 						return([
@@ -107,7 +111,7 @@ const Home = () => {
 									<div className="col-xl-12">
 										<div className="card text-center">
 											<div className="card-body">
-												<h1>{sensor._field}</h1>
+												<h1>{sensor._nama}</h1>
 												<div id="radialChart" className="radialChart">
 													<RadialDount value={sensor._value} jenis={sensor._field}/>
 												</div>

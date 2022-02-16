@@ -61,10 +61,10 @@ const SideBar = () => {
   /// Active menu
   let deshBoard = [""],
     Powermeter = [
-    "powermeter-1",
-    "powermeter-2",
-    "powermeter-3",
-    "powermeter-4",
+    "mitsubishi",
+    "siemens",
+    "acuvim",
+    "demo",
     "powermeter-5",
     ],
     // deshBoard = [
@@ -201,10 +201,10 @@ const SideBar = () => {
               <span className="nav-text">Powermeter</span>
             </Link>
             <ul >
-              <li><Link className={`${path === "powermeter-1" ? "mm-active" : "dashboard"}`} to="/powermeter-1">Mitsubishi</Link></li>
-				      <li><Link className={`${path === "powermeter-2" ? "mm-active" : ""}`} to="/powermeter-2">Siemens</Link></li>
-              <li><Link className={`${path === "powermeter-3" ? "mm-active" : ""}`} to="/powermeter-3">Acuvim</Link></li>
-              <li><Link className={`${path === "powermeter-4" ? "mm-active" : ""}`} to="/powermeter-4">Demo</Link></li>
+              <li><Link className={`${path === "mitsubishi" ? "mm-active" : "dashboard"}`} to="/mitsubishi">Mitsubishi</Link></li>
+				      <li><Link className={`${path === "siemens" ? "mm-active" : ""}`} to="/siemens">Siemens</Link></li>
+              <li><Link className={`${path === "acuvim" ? "mm-active" : ""}`} to="/acuvim">Acuvim</Link></li>
+              <li><Link className={`${path === "demo" ? "mm-active" : ""}`} to="/demo">Demo</Link></li>
               {/* <li><Link className={`${path === "powermeter-5" ? "mm-active" : ""}`} to="/powermeter-5">Powermeter 5</Link></li> */}
             </ul>
           </li>

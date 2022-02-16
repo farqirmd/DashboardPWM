@@ -134,10 +134,10 @@ const Markup = () => {
     { url: "Home", component: Landing},
 
     /// Powermeter
-    { url: "powermeter-1", component: Powermeter1},
-    { url: "powermeter-2", component: Powermeter2},
-    { url: "powermeter-3", component: Powermeter3},
-    { url: "powermeter-4", component: Powermeter4},
+    { url: "mitsubishi", component: Powermeter1},
+    { url: "siemens", component: Powermeter2},
+    { url: "acuvim", component: Powermeter3},
+    { url: "demo", component: Powermeter4},
     { url: "powermeter-5", component: Powermeter5},
 
     /// Dashboard
