@@ -15,11 +15,11 @@ class HistoryChart extends React.Component {
 		props.value.map((sensor, index) => {
 			console.log(sensor)
 			if (sensor._field === "V"){
-				this.voltage = this.voltage.concat([sensor._value / 100])
+				this.voltage = this.voltage.concat([sensor._value])
 			} else if (sensor._field === "I"){
-				this.current = this.current.concat([sensor._value / 100])
+				this.current = this.current.concat([sensor._value])
 			} else if (sensor._field === "P"){
-				this.power = this.power.concat([sensor._value / 1000])
+				this.power = this.power.concat([sensor._value])
 			} else {
 				this.freq = this.freq.concat([sensor._value])
 				// console.log(this.freq)
