@@ -14,6 +14,7 @@ class HistoryChart extends React.Component {
 
 	constructor(props) {
 		super(props);
+		console.log(props.value)
 		props.value.map((sensor, index) => {
 			if (sensor._field === "V"){
 				this.voltage = this.voltage.concat([sensor._value])
@@ -24,12 +25,12 @@ class HistoryChart extends React.Component {
 			} else {
 				this.freq = this.freq.concat([sensor._value])
 			}
-			console.log(sensor._time)
-			this.temp = new Date(sensor._time)
-			console.log(this.temp)
+			// console.log(sensor._time)
+			this.temp = sensor._time
+			// console.log(this.temp)
 			// sensor._time = this.temp.toLocaleTimeString()
-			// this.time = this.time.concat([sensor._time.slice(11, 19)]);
-			this.time = this.time.concat([sensor._time]);
+			this.time = this.time.concat([this.temp.slice(11, 19)]);
+			// this.time = this.time.concat([this.temp]);
 		});
 		this.time = [...new Set(this.time)];
 		// console.log(this.time)
@@ -100,6 +101,9 @@ class HistoryChart extends React.Component {
 				xaxis: {
 					categories: this.time,
 					labels:{
+						formatter: function(value, timestamp, opts) {
+							return value
+						},
 						style: {
 							colors: '#787878',
 							fontSize: '13px',

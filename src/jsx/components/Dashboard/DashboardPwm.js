@@ -1,6 +1,6 @@
 import React,{useState, useContext, useEffect} from 'react';
 import { Link } from "react-router-dom";
-import  {Dropdown} from 'react-bootstrap';
+import  {Button, Dropdown} from 'react-bootstrap';
 import loadable from "@loadable/component";
 import pMinDelay from "p-min-delay";
 import Calendar from "react-calendar";
@@ -20,6 +20,7 @@ import HistoryChart from './Dashboard/HistoryChart';
 import LatestCustomer from './Dashboard/LatestCustomer'; 
 import axios from 'axios';
 import Hypnosis from "react-cssfx-loading/lib/Hypnosis";
+import CsvDownload from 'react-json-to-csv'
 
 const AnalyticsDonut = loadable(() =>
 	pMinDelay(import("./Dashboard/AnalyticsDonut"), 1000)
@@ -39,6 +40,8 @@ const Home = () => {
 	const [dataHistoryChart, setDataHistoryChart] = useState([]);
 	const [statusData, setStatusData] = useState();
 	const [filterSensor, setFilterSensor] = useState('Tegangan');
+	const [rataRata, setRataRata] = useState(0);
+	const [estimasiHarga, setEstimasiHarga] = useState(0);
 	// const [dataMingguan, setDataMingguan] = useState([]);
 	// const [dataBulanan, setDataBulanan] = useState([]);
 	// const [dataHistoryChart, setDataHistoryChart] = useState();
@@ -50,10 +53,11 @@ const Home = () => {
 			// console.log(response.data)
 		})
 		axios.get(url + 'data-harian?topic=' + topic).then((response) => {
-			// console.log(response.data)
 			setDataHistoryChart(response.data.data)
-			setLoading(false)
+			console.log(response.data.data)
 			setStatusData("Harian")
+			setLoading(false)
+			hitungRataRata("V")
 		})
 		return () => setLoading(false);
 	}, []);
@@ -65,6 +69,7 @@ const Home = () => {
 			setDataHistoryChart(response.data.data)
 			setLoading(false)
 			setStatusData("Harian")
+			hitungRataRata("V")
 		})
 	}
 
@@ -72,8 +77,9 @@ const Home = () => {
 		setLoading(true)
 		axios.get(url + 'data-mingguan?topic=' + topic).then((response) => {
 			setDataHistoryChart(response.data.data)
-			setLoading(false)
 			setStatusData("Mingguan")
+			hitungRataRata("V")
+			setLoading(false)
 		})
 	}
 
@@ -83,6 +89,8 @@ const Home = () => {
 			setDataHistoryChart(response.data.data)
 			setLoading(false)
 			setStatusData("Bulanan")
+			hitungRataRata("V")
+			// console.log(dataHistoryChart)
 		})
 	}
 
@@ -90,6 +98,7 @@ const Home = () => {
 		setLoading(true)
 		setFilterSensor('Tegangan')
 		setTimeout(() => {
+			hitungRataRata("V")
 			setLoading(false)
 		}, 1000);
 	}
@@ -98,6 +107,7 @@ const Home = () => {
 		setLoading(true)
 		setFilterSensor('Arus')
 		setTimeout(() => {
+			hitungRataRata("I")
 			setLoading(false)
 		}, 1000);
 	}
@@ -106,6 +116,7 @@ const Home = () => {
 		setLoading(true)
 		setFilterSensor('Daya')
 		setTimeout(() => {
+			hitungRataRata("P")
 			setLoading(false)
 		}, 1000);
 	}
@@ -114,8 +125,35 @@ const Home = () => {
 		setLoading(true)
 		setFilterSensor('Frekuensi')
 		setTimeout(() => {
+			hitungRataRata("f")
 			setLoading(false)
 		}, 1000);
+	}
+
+	const hitungRataRata = (filter) => {
+		setRataRata(0)
+		let total = 0
+		let panjang = 1
+		let hasil = 0
+		dataHistoryChart.map((sensor, index) => {
+			if (sensor._field === filter){
+				total = (total + sensor._value)
+				panjang = index
+			}
+		});
+		console.log(total)
+		hasil = total / panjang
+		if (hasil === NaN){
+			hasil = 0
+		}
+		setRataRata(hasil)
+		total = total * 2000
+		setEstimasiHarga(total)
+		console.log(rataRata)
+		// console.log(hasil)
+		
+		// console.log(temp)
+		// console.log(panjang)
 	}
 
 	if (loading){
@@ -163,7 +201,7 @@ const Home = () => {
 						])
 					})}
 				</div>
-				<div className="row">
+				<div className="row mb-5">
 					<div className="col-12">
 						<div className="card">
 							<div className="card-header border-0 d-sm-flex d-block">
@@ -175,9 +213,19 @@ const Home = () => {
 									<div className="d-flex me-5">
 										<p className="mb-0 me-2" style={{fontSize:'18px'}}>Region : <b style={{color:'#000'}}>{dataHistoryChart.length === 0 ? "Bandung" : dataHistoryChart[0].region}</b></p>
 									</div>
-									{/* <div className="d-flex me-3">
-										<p className="mb-0 me-2" style={{fontSize:'18px'}}>Device : <b style={{color:'#000'}}>{dataHistoryChart.length === 0 ? "Tidak ada data" : dataHistoryChart[0].sensor_id}</b></p>
-									</div> */}
+									<div className="d-flex me-3">
+										<p className="mb-0 me-2" style={{fontSize:'18px'}}>Rata-rata : <b style={{color:'#000'}}>{rataRata === 0 ? "Tidak ada data" : rataRata.toFixed(2)}</b></p>
+									</div>
+								</div>
+							</div>
+							<div className="card-body">
+								<div id="historyData" className="historyData">
+									<HistoryChart value={dataHistoryChart} filter={filterSensor}/>
+								</div>
+								<div className="d-flex justify-content-between align-items-center mb-3">
+									<div className="d-flex me-5">
+										<p className="mb-0 me-2" style={{fontSize:'18px'}}>Estimasi Biaya : <b style={{color:'#000'}}>{estimasiHarga === 0 ? "Tidak ada data" : "Rp " + estimasiHarga.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</b></p>
+									</div>
 									<div className="d-flex me-3 basic-dropdown">
 										<Dropdown className='me-3'>
 											<Dropdown.Toggle variant="primary">
@@ -190,7 +238,7 @@ const Home = () => {
 												<Dropdown.Item onClick={handleFrekuensi}>Frekuensi</Dropdown.Item>
 											</Dropdown.Menu>
 										</Dropdown>
-										<Dropdown>
+										<Dropdown className='me-3'>
 											<Dropdown.Toggle variant="primary">
 												{statusData}
 											</Dropdown.Toggle>
@@ -200,12 +248,10 @@ const Home = () => {
 												<Dropdown.Item onClick={handleBulanan}>Bulanan</Dropdown.Item>
 											</Dropdown.Menu>
 										</Dropdown>
+										<CsvDownload style={{opacity: '1'}} className="me-2 btn btn-primary" variant="primary" data={dataHistoryChart}>
+											Download CSV
+										</CsvDownload>
 									</div>
-								</div>
-							</div>
-							<div className="card-body">
-								<div id="historyData" className="historyData">
-									<HistoryChart value={dataHistoryChart} filter={filterSensor}/>
 								</div>
 							</div>
 						</div>
