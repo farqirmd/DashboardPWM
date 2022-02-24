@@ -42,15 +42,11 @@ const Home = () => {
 	const [filterSensor, setFilterSensor] = useState('Tegangan');
 	const [rataRata, setRataRata] = useState(0);
 	const [estimasiHarga, setEstimasiHarga] = useState(0);
-	// const [dataMingguan, setDataMingguan] = useState([]);
-	// const [dataBulanan, setDataBulanan] = useState([]);
-	// const [dataHistoryChart, setDataHistoryChart] = useState();
 
 	useEffect(() => {
 		changeBackground({ value: "light", label: "Light" });
 		axios.get(url + 'data-terbaru?topic=' + topic).then((response) => {
 			setDataTerbaru(response.data.data)
-			// console.log(response.data)
 		})
 		axios.get(url + 'data-harian?topic=' + topic).then((response) => {
 			setDataHistoryChart(response.data.data)
@@ -90,7 +86,6 @@ const Home = () => {
 			setLoading(false)
 			setStatusData("Bulanan")
 			hitungRataRata("V")
-			// console.log(dataHistoryChart)
 		})
 	}
 
@@ -147,13 +142,11 @@ const Home = () => {
 			hasil = 0
 		}
 		setRataRata(hasil)
-		total = total * 2000
-		setEstimasiHarga(total)
+		if (filter === "P"){
+			total = total * 2000
+			setEstimasiHarga(total)
+		}
 		console.log(rataRata)
-		// console.log(hasil)
-		
-		// console.log(temp)
-		// console.log(panjang)
 	}
 
 	if (loading){
@@ -189,9 +182,9 @@ const Home = () => {
 											<div className="card-body">
 												<h1>{sensor._nama}</h1>
 												<div id="radialChart" className="radialChart">
-													<RadialDount value={sensor._value} jenis={sensor._field}/>
+													<RadialDount value={sensor._value.toFixed(2)} jenis={sensor._field}/>
 												</div>
-												<h2>{sensor._value}</h2>
+												<h2>{sensor._value.toFixed(2)}</h2>
 												<span className="fs-16 text-black">{sensor._satuan}</span>
 											</div>
 										</div>

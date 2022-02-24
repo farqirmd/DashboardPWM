@@ -17,19 +17,20 @@ class HistoryChart extends React.Component {
 		console.log(props.value)
 		props.value.map((sensor, index) => {
 			if (sensor._field === "V"){
-				this.voltage = this.voltage.concat([sensor._value])
+				this.voltage = this.voltage.concat([sensor._value.toFixed(2)])
 			} else if (sensor._field === "I"){
-				this.current = this.current.concat([sensor._value])
+				this.current = this.current.concat([sensor._value.toFixed(2)])
 			} else if (sensor._field === "P"){
-				this.power = this.power.concat([sensor._value])
+				this.power = this.power.concat([sensor._value.toFixed(2)])
 			} else {
-				this.freq = this.freq.concat([sensor._value])
+				this.freq = this.freq.concat([sensor._value.toFixed(2)])
 			}
 			// console.log(sensor._time)
-			this.temp = sensor._time
+			this.temp = new Date(sensor._time).toLocaleString();
+			console.log(this.temp)
 			// console.log(this.temp)
 			// sensor._time = this.temp.toLocaleTimeString()
-			this.time = this.time.concat([this.temp.slice(11, 19)]);
+			this.time = this.time.concat(this.temp);
 			// this.time = this.time.concat([this.temp]);
 		});
 		this.time = [...new Set(this.time)];
@@ -99,18 +100,22 @@ class HistoryChart extends React.Component {
 					},
 				},
 				xaxis: {
+					// type: 'datetime',
+					// range: 10,
 					categories: this.time,
 					labels:{
-						formatter: function(value, timestamp, opts) {
-							return value
-						},
-						style: {
-							colors: '#787878',
-							fontSize: '13px',
-							fontFamily: 'Poppins',
-							fontWeight: 400
+						// formatter: function(value, timestamp, opts) {
+						// 	return value
+						// },
+						// style: {
+						// 	colors: '#787878',
+						// 	fontSize: '13px',
+						// 	fontFamily: 'Poppins',
+						// 	fontWeight: 400
 						
-						},
+						// },
+						// trim: true,
+						hideOverlappingLabels: true,
 					}
 				},
 				fill:{

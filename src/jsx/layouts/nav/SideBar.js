@@ -208,7 +208,7 @@ const SideBar = () => {
               {/* <li><Link className={`${path === "powermeter-5" ? "mm-active" : ""}`} to="/powermeter-5">Powermeter 5</Link></li> */}
             </ul>
           </li>
-          <li className={`${deshBoard.includes(path) ? "mm-active" : ""}`}>
+          {/* <li className={`${deshBoard.includes(path) ? "mm-active" : ""}`}>
             <Link className="has-arrow ai-icon" to="#" >
               <i className="flaticon-025-dashboard"></i>
               <span className="nav-text">Dashboard</span>
@@ -576,7 +576,7 @@ const SideBar = () => {
                 </Link>
               </li>
             </ul>
-          </li>
+          </li> */}
         </MM>
 		<div className="copyright">
 			<p><strong>Antares Admin</strong> © 2022 All Rights Reserved</p>
